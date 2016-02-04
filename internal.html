@@ -1,0 +1,164 @@
+<!DOCTYPE>
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css" />
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+    <style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        padding: 0%;
+        margin: 0%;
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+        background: black;
+		center: [600,0]
+    }
+
+    #menu {
+        position: absolute;
+        top: 160px;
+        right: 600px;
+        width: 100px;
+        height: 60px;
+        background: transparent;
+        z-index: auto;
+    }
+	
+	 #menu2 {
+        position: absolute;
+        top: 120px;
+        right: 515px;
+        width: 500px;
+        height: 60px;
+        background: transparent;
+        z-index: auto;
+    }
+
+    #menu a{
+        margin: 15px 10px 0 0;
+        float: right;
+        vertical-align: baseline;
+        width: 100px;
+        padding: 10px;
+        text-align: center;
+        font: bold 11px "Helvetica", Arial;
+        line-height: normal;
+        color: #000000;
+        border-radius: 50px;
+        border: 1px solid #777777;
+        background: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+		
+    }
+
+    #menu2 a{
+        margin: 0px 50px 200px 0;
+        float: right;
+        vertical-align: baseline;
+        width: 200px;
+        padding: 10px;
+        text-align: center;
+        font: bold 11px "Helvetica", Arial;
+        line-height: normal;
+        color: #000000;
+        border-radius: 50px;
+        border: 1px solid #777777;
+        background: #ffffff;
+        text-decoration: none;
+        
+	}
+    #menu a.selected,
+    #menu a:hover {
+        color: #ffffff;
+		background-color: #000000;
+    }
+	#menu a.selected,
+	#menu a:active {
+        color: #ffffff;
+		background-color: #000000;
+    }
+
+
+    .cartodb-layer-selector-box,
+    .cartodb-searchbox,
+    .cartodb-share {
+        display: none !important;
+    }
+    </style>
+    <script>
+	
+	
+	var layer;
+
+
+    function init() {
+        var url = 'https://urbancouk.cartodb.com/api/v2/viz/5c111422-b3a8-11e5-a3c3-0ecd1babdde5/viz.json';
+        var visualizacion = cartodb.createVis("map", url)
+            .done(function(vis, layers) {
+                layer = layers[1];
+            });
+    }
+
+	
+	
+    function showLayer(layerToShow) {
+
+     //turn off all layers
+        layer.getSubLayers().forEach(function(i) {
+            i.hide()
+        });    
+
+        switch (layerToShow.id) {
+            case "18 - 21":
+                layer.getSubLayer(0).show();
+                break;
+            case "22 - 29":
+                layer.getSubLayer(1).show();
+				layer.getSubLayer(0).hide();
+                break;
+            case "30 - 64":
+                layer.getSubLayer(2).show();
+				
+                break;
+			case "65+":
+                layer.getSubLayer(3).show();
+				
+                break;
+        }
+
+        return true;
+    }
+	
+	function manualsPane() {
+    document.getElementById('menu a').style.color='#93c2e9'; // style the button
+    chgButtonManuals(); // call function to write the content with innerhtml
+}
+
+
+
+    </script>
+</head>
+
+<body onload="init()">
+    <div id='map'></div>
+    <div id='menu'>
+        <a href="#18 - 21" id="18 - 21" class="button 18 - 21" onclick="showLayer(this);">18 - 21</a>
+        <a href="#22 - 29" id="22 - 29" class="button 22 - 29" onclick="showLayer(this);">22 - 29</a>
+        <a href="#30 - 64" id="30 - 64" class="button 30 - 64" onclick="showLayer(this)">30 - 64</a>
+		<a href="#65+" id="65+" class="button 65+" onclick="showLayer(this)">65+</a>
+    </div>
+	<div id='menu2'>
+		<a href="javaScript:void(0);" id="layerchoice" >Select an age range by clicking on a button below:</a>
+
+	
+</body>
+
+</html>
