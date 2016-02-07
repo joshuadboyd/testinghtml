@@ -13,14 +13,12 @@
         padding: 0%;
         margin: 0%;
     }
-
     #map {
-        width: 100%;
+        width: 650px;
         height: 100%;
         background: black;
 		center: [600,0]
     }
-
     #menu {
         position: absolute;
         top: 160px;
@@ -34,13 +32,12 @@
 	 #menu2 {
         position: absolute;
         top: 120px;
-        right: 515px;
+        right: 1000px;
         width: 500px;
         height: 60px;
         background: transparent;
         z-index: auto;
     }
-
     #menu a{
         margin: 15px 10px 0 0;
         float: right;
@@ -58,7 +55,6 @@
         cursor: pointer;
 		
     }
-
     #menu2 a{
         margin: 0px 50px 200px 0;
         float: right;
@@ -85,8 +81,6 @@
         color: #ffffff;
 		background-color: #000000;
     }
-
-
     .cartodb-layer-selector-box,
     .cartodb-searchbox,
     .cartodb-share {
@@ -97,8 +91,6 @@
 	
 	
 	var layer;
-
-
     function init() {
         var url = 'https://urbancouk.cartodb.com/api/v2/viz/5c111422-b3a8-11e5-a3c3-0ecd1babdde5/viz.json';
         var visualizacion = cartodb.createVis("map", url)
@@ -106,16 +98,13 @@
                 layer = layers[1];
             });
     }
-
 	
 	
     function showLayer(layerToShow) {
-
      //turn off all layers
         layer.getSubLayers().forEach(function(i) {
             i.hide()
         });    
-
         switch (layerToShow.id) {
             case "18 - 21":
                 layer.getSubLayer(0).show();
@@ -133,7 +122,6 @@
 				
                 break;
         }
-
         return true;
     }
 	
@@ -141,9 +129,6 @@
     document.getElementById('menu a').style.color='#93c2e9'; // style the button
     chgButtonManuals(); // call function to write the content with innerhtml
 }
-
-
-
     </script>
 </head>
 
